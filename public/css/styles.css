@@ -1,0 +1,32 @@
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  color: #fff;
+}
+.tab{
+  text-align: center;
+  margin-bottom: 10px;
+}
+.title{
+  text-align: center;
+  background-color: #1b262c;
+  color: #fff;
+  padding: 10px;
+}
+.table-section{
+  background-color: #0f4c75;
+}
+.chart-section{
+  padding-right: 15px;
+  background-color: #fff;
+}
+.container-fluid{
+  padding: 15px;
+}
+.btn-success{
+margin-right: 15px;
+}
+
+.row{
+  padding-right: 15px;
+}

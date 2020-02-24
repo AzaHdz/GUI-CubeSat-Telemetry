@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Telemetria</title>
+  <!-- links de bootstrap y estilos-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+  <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<!-- links para usar socket io y chart js para graficar -->
+
+<body>
+  <section class="title">
+    <h2>Registro de Telemetria</h4>
+  </section>
+  <section class="table-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-2">
+          <button type="button" class="btn btn-success btn-lg btn-block">Inicio</button>
+          <button type="button" class="btn btn-danger btn-lg btn-block">Fin</button>
+        </div>
+        <div class="col-lg-10">
+          <div class="row">
+            <table class="tab" style="width:100%">
+              <tr>
+                <th>t de mision</th>
+                <th>No. de paquete</th>
+                <th>altura [m]</th>
+                <th>presion [Pa]</th>
+                <th>temperatura [°C]</th>
+                <th>voltaje [v]</th>
+                <th>hora</th>
+                <th>GPS latitud</th>
+                <th>GPS longitud</th>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td id="count">0</td>
+                <td id="tab-alt">0</td>
+                <td id="tab-pre">0</td>
+                <td id="tab-tem">0</td>
+                <td id="tab-vol">0</td>
+                <td >0</td>
+                <td id="tab-lat">0</td>
+                <td id="tab-lon">0</td>
+              </tr>
+            </table>
+          </div>
+          <div class="row">
+            <table class="tab" style="width:100%">
+              <tr>
+                <th>GPS altitud</th>
+                <th>GPS sats</th>
+                <th>x [°]</th>
+                <th>y [°]</th>
+                <th>z [°]</th>
+                <th>Estado</th>
+
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- graficas -->
+  <section class="chart-section">
+    <div class="container-fluid">
+      <!-- Renglon con tres columnas-->
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <label for="" id="dato:altura">Altura</label>
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <label for="" id="dato:presion">Presión</label>
+          <canvas id="myChart2"></canvas>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <label for="" id="dato:temperatura">temperatura</label>
+          <canvas id="myChart3"></canvas>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <label for="" id="dato:voltaje">voltaje</label>
+          <canvas id="myChart4"></canvas>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <label for="">GPS</label>
+          <canvas id="myChart5"></canvas>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <label for="">Luz Ambiental</label>
+          <canvas id="myChart6"></canvas>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+  <!-- graficas -->
+  <section class="gps">
+
+  </section>
+
+  <script src="main.js" charset="utf-8"></script>
+</body>
+
+</html>
