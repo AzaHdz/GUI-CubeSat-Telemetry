@@ -28,47 +28,46 @@
           <div class="row">
             <table class="tab" style="width:100%">
               <tr>
-                <th>t de mision</th>
                 <th>No. de paquete</th>
                 <th>altura [m]</th>
                 <th>presion [Pa]</th>
                 <th>temperatura [°C]</th>
                 <th>voltaje [v]</th>
-                <th>hora</th>
-                <th>GPS latitud</th>
-                <th>GPS longitud</th>
+                <th>corriente [mA]</th>
               </tr>
               <tr>
-                <td>0</td>
-                <td id="count">0</td>
-                <td id="tab-alt">0</td>
+                <td id="paquete">0</td>
+                <td id="tab-altura">0</td>
                 <td id="tab-pre">0</td>
                 <td id="tab-tem">0</td>
                 <td id="tab-vol">0</td>
-                <td >0</td>
-                <td id="tab-lat">0</td>
-                <td id="tab-lon">0</td>
+                <td id="tab-i">0</td>
               </tr>
             </table>
           </div>
           <div class="row">
             <table class="tab" style="width:100%">
               <tr>
-                <th>GPS altitud</th>
-                <th>GPS sats</th>
-                <th>x [°]</th>
-                <th>y [°]</th>
-                <th>z [°]</th>
-                <th>Estado</th>
-
+                <th>tiempo UTC</th>
+                <th>latidud</th>
+                <th>longitud</th>
+                <th>altitud</th>
+                <th>satélites</th>
+                <th>ángulo X [°]</th>
+                <th>ángulo Y [°]</th>
+                <th>ángulo z [°]</th>
+                <th>iluminación [lux]</th>
               </tr>
               <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
+                <td id="UTC">0</td>
+                <td id="tab-lat">0</td>
+                <td id="tab-lon">0</td>
+                <td id="tab-alt">0</td>
+                <td id="tab-sat">0</td>
+                <td id="tab-x">0</td>
+                <td id="tab-y">0</td>
+                <td id="tab-z">0</td>
+                <td id="tab-lux">0</td>
               </tr>
             </table>
           </div>
@@ -84,31 +83,25 @@
     <div class="container-fluid">
       <!-- Renglon con tres columnas-->
       <div class="row">
-        <div class="col-lg-4 col-md-6">
-          <label for="" id="dato:altura">Altura</label>
-          <canvas id="myChart"></canvas>
+        <div class="col-lg-4 col-md-6"> <!--primera columna-->
+          <canvas id="grafica-altura"></canvas> <!--primera grafica-->
         </div>
         <div class="col-lg-4 col-md-6">
-          <label for="" id="dato:presion">Presión</label>
-          <canvas id="myChart2"></canvas>
+          <canvas id="grafica-presion"></canvas>
         </div>
         <div class="col-lg-4 col-md-6">
-          <label for="" id="dato:temperatura">temperatura</label>
-          <canvas id="myChart3"></canvas>
+          <canvas id="grafica-temperatura"></canvas>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-4 col-md-6">
-          <label for="" id="dato:voltaje">voltaje</label>
-          <canvas id="myChart4"></canvas>
+          <canvas id="grafica-voltaje"></canvas>
         </div>
         <div class="col-lg-4 col-md-6">
-          <label for="">GPS</label>
-          <canvas id="myChart5"></canvas>
+          <canvas id="grafica-iluminacion"></canvas>
         </div>
         <div class="col-lg-4 col-md-6">
-          <label for="">Luz Ambiental</label>
-          <canvas id="myChart6"></canvas>
+
         </div>
 
       </div>

@@ -5,85 +5,103 @@ let counter = 0; //contador para los paquetes de datos que llegan por el serial
 
 ////********** Datos recibidos ****///////////
 socket.on("telemetria", function(dataSerial) { //inicia recepcion de datos del cliente  con el evento "telemetria"
-  ///Altura
-  console.log(dataSerial.altura);
-  chart.data.labels.push(counter); // agrega el numero del contador a labels en la grafica (chart)
-  chart.data.datasets.forEach(dataset => {
-    dataset.data.push(dataSerial.altura); //agrega el dato de altura a data en la grafica
-    let altura = document.getElementById("dato:altura"); //es la etiqueta mostrada arriba de la grafica de altura
-    altura.innerHTML = "Altura: " + dataSerial.altura + "  [m]"; //modifica el dato de la etiqueta con cada paquete recibido
-    let tabAl = document.getElementById("tab-alt"); //es el dato de altura que se muestra en las tablas
-    tabAl.innerHTML = dataSerial.altura; //modifica el dato de altura en la tabla
-  });
 
-  //segundo dato a graficar PRESION
-  console.log(dataSerial.presion);
-  chart2.data.labels.push(counter);
-  chart2.data.datasets.forEach(dataset => {
-    dataset.data.push(dataSerial.presion);
-    let pres = document.getElementById("dato:presion");
-    pres.innerHTML = "Presion: " + dataSerial.presion + "  [KPa]";
-    let tabPre = document.getElementById("tab-pre");
-    tabPre.innerHTML = dataSerial.presion;
-  });
+  let cuenta = document.getElementById("paquete");
+  cuenta.innerHTML = dataSerial.paquete;
 
-  //Tercer dato a graficar Temperatura junto con label
-  console.log(dataSerial.temperatura);
-  chart3.data.labels.push(counter);
-  chart3.data.datasets.forEach(dataset => {
-    dataset.data.push(dataSerial.temperatura);
-    let temp = document.getElementById("dato:temperatura");
-    temp.innerHTML = "Temperatura: " + dataSerial.temperatura + " [°C]";
-    let tabTem = document.getElementById("tab-tem");
-    tabTem.innerHTML = dataSerial.temperatura;
-  });
+  let tabAltura = document.getElementById("tab-altura"); //es el dato de altura que se muestra en las tablas
+  tabAltura.innerHTML = dataSerial.altura; //modifica el dato de altura en la tabla
 
-  //cuarto dato a graficar Voltaje
-  console.log(dataSerial.voltaje);
-  chart4.data.labels.push(counter);
-  chart4.data.datasets.forEach(dataset => { //ejecuta la función indicada una vez por cada elemento del array
-    dataset.data.push(dataSerial.voltaje);
-    let vol = document.getElementById("dato:voltaje");
-    vol.innerHTML = "Voltaje: " + dataSerial.voltaje + " [V]";
-    let tabVol = document.getElementById("tab-vol");
-    tabVol.innerHTML = dataSerial.voltaje;
-  });
+  let tabPre = document.getElementById("tab-pre");
+  tabPre.innerHTML = dataSerial.presion;
 
-  //   //grafica del gps
+  let tabTem = document.getElementById("tab-tem");
+  tabTem.innerHTML = dataSerial.temperatura;
+
+  let tabVol = document.getElementById("tab-vol");
+  tabVol.innerHTML = dataSerial.voltaje;
+
+  console.log(dataSerial.corriente);
+  let tabI = document.getElementById("tab-i");
+  tabI.innerHTML = dataSerial.corriente;
+
+  console.log(dataSerial.tiempo);
+  let tabUTC = document.getElementById("UTC");
+  tabUTC.innerHTML = dataSerial.tiempo;
+
+  console.log(dataSerial.latitud);
+  let tabLat = document.getElementById("tab-lat");
+  tabLat.innerHTML = dataSerial.latitud;
+
   console.log(dataSerial.longitud);
-   chart5.data.labels.push(dataSerial.longitud);
-   let tabLon = document.getElementById("tab-lon");
-   tabLon.innerHTML = dataSerial.longitud;
-   chart5.data.datasets.forEach(dataset => {
-    dataset.data.push(dataSerial.latitud);
-    let tabLat = document.getElementById("tab-lat");
-    tabLat.innerHTML = dataSerial.latitud;
+  let tabLon = document.getElementById("tab-lon");
+  tabLon.innerHTML = dataSerial.longitud;
 
-   });
-  //   let vol = document.getElementById("dato:voltaje");
-  //   vol.innerHTML = "Voltaje: "+ dataSerial.voltaje + " [V]";
-   // });
+  console.log(dataSerial.altitud);
+  let tabAlt = document.getElementById("tab-alt");
+  tabAlt.innerHTML = dataSerial.altitud;
 
-let cuenta = document.getElementById("count");
-cuenta.innerHTML = counter;
+  console.log(dataSerial.satelites);
+  let tabSat = document.getElementById("tab-sat");
+  tabSat.innerHTML = dataSerial.satelites;
+
+  console.log(dataSerial.angX);
+  let anguloX = document.getElementById("tab-x");
+  anguloX.innerHTML = dataSerial.angX;
+
+  console.log(dataSerial.angY);
+  let anguloY = document.getElementById("tab-y");
+  anguloY.innerHTML = dataSerial.angY;
+
+  console.log(dataSerial.angZ);
+  let anguloZ = document.getElementById("tab-z");
+  anguloZ.innerHTML = dataSerial.angZ;
+
+  console.log(dataSerial.lux);
+  let ilum = document.getElementById("tab-lux");
+  ilum.innerHTML = dataSerial.lux;
+
+  ///Altura
+  graficaAltura.data.labels.push(counter); // agrega el numero del contador a labels en la grafica (chart)
+  graficaAltura.data.datasets.forEach(dataset => {
+    dataset.data.push(dataSerial.altura); //agrega el dato de altura a data en la grafica
+  });
+  //segundo dato a graficar PRESION
+  graficaPresion.data.labels.push(counter);
+  graficaPresion.data.datasets.forEach(dataset => {
+    dataset.data.push(dataSerial.presion);
+  });
+  //Tercer dato a graficar Temperatura junto con label
+  graficaTemperatura.data.labels.push(counter);
+  graficaTemperatura.data.datasets.forEach(dataset => {
+    dataset.data.push(dataSerial.temperatura);
+  });
+  //cuarto dato a graficar Voltaje
+  graficaVoltaje.data.labels.push(counter);
+  graficaVoltaje.data.datasets.forEach(dataset => { //ejecuta la función indicada una vez por cada elemento del array
+    dataset.data.push(dataSerial.voltaje);
+  });
+//iluminacion
+  graficaIluminacion.data.labels.push(counter);
+  graficaIluminacion.data.datasets.forEach(dataset => { //ejecuta la función indicada una vez por cada elemento del array
+    dataset.data.push(dataSerial.lux);
+  });
 
   counter++;
-
   //se actualizan graficas
-  chart.update();
-  chart2.update();
-  chart3.update();
-  chart4.update();
-  chart5.update();
-});
+  graficaAltura.update();
+  graficaPresion.update();
+  graficaTemperatura.update();
+  graficaVoltaje.update();
+  graficaIluminacion.update();
 
+});
 ////////////*********graficas************////////////////7///
 // grafica 1 Altura
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
+var ctx = document.getElementById('grafica-altura').getContext('2d');
+var graficaAltura = new Chart(ctx, {
   // The type of chart we want to create
   type: 'line',
-
   // The data for our dataset
   data: {
     labels: [],
@@ -99,16 +117,15 @@ var chart = new Chart(ctx, {
 });
 
 //Grafica 2 Presion
-var ctx = document.getElementById('myChart2').getContext('2d');
-var chart2 = new Chart(ctx, {
+var ctx = document.getElementById('grafica-presion').getContext('2d');
+var graficaPresion = new Chart(ctx, {
   // The type of chart we want to create
   type: 'line',
-
   // The data for our dataset
   data: {
     labels: [],
     datasets: [{
-      label: 'presion[KPa]',
+      label: 'presion[Pa]',
       //backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(30,144,255)',
       data: []
@@ -117,10 +134,9 @@ var chart2 = new Chart(ctx, {
   // Configuration options go here
   options: {}
 });
-
 //grafica 3 Temperatura
-var ctx = document.getElementById('myChart3').getContext('2d');
-var chart3 = new Chart(ctx, {
+var ctx = document.getElementById('grafica-temperatura').getContext('2d');
+var graficaTemperatura = new Chart(ctx, {
   // The type of chart we want to create
   type: 'line',
 
@@ -137,33 +153,11 @@ var chart3 = new Chart(ctx, {
   // Configuration options go here
   options: {}
 });
-
 //grafica 4 Voltaje
-var ctx = document.getElementById('myChart4').getContext('2d');
-var chart4 = new Chart(ctx, {
+var ctx = document.getElementById('grafica-voltaje').getContext('2d');
+var graficaVoltaje = new Chart(ctx, {
   // The type of chart we want to create
   type: 'line',
-
-  // The data for our dataset
-  data: {
-    labels: [],
-    datasets: [{
-      label: 'Voltaje[V]',
-      //backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(0,100,0)',
-      data: []
-    }]
-  },
-  // Configuration options go here
-  options: {}
-});
-
-// grafica 5 GPS
-var ctx = document.getElementById('myChart5').getContext('2d');
-var chart5 = new Chart(ctx, {
-  // The type of chart we want to create
-  type: 'line',
-
   // The data for our dataset
   data: {
     labels: [],
@@ -179,16 +173,15 @@ var chart5 = new Chart(ctx, {
 });
 
 //grafica 6 luz ambiental
-var ctx = document.getElementById('myChart6').getContext('2d');
-var chart6 = new Chart(ctx, {
+var ctx = document.getElementById('grafica-iluminacion').getContext('2d');
+var graficaIluminacion = new Chart(ctx, {
   // The type of chart we want to create
   type: 'line',
-
   // The data for our dataset
   data: {
     labels: [],
     datasets: [{
-      label: 'Voltaje[V]',
+      label: 'iluminacion [lux]',
       //backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(0,100,0)',
       data: []
