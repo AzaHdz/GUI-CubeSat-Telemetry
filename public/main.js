@@ -81,6 +81,11 @@ socket.on("telemetria", function(dataSerial) { //inicia recepcion de datos del c
   graficaVoltaje.data.datasets.forEach(dataset => { //ejecuta la función indicada una vez por cada elemento del array
     dataset.data.push(dataSerial.voltaje);
   });
+  //grafica de la Corriente
+  graficaCorriente.data.labels.push(counter);
+  graficaCorriente.data.datasets.forEach(dataset => {
+    dataset.data.push(dataSerial.corriente);
+  });
 //iluminacion
   graficaIluminacion.data.labels.push(counter);
   graficaIluminacion.data.datasets.forEach(dataset => { //ejecuta la función indicada una vez por cada elemento del array
@@ -94,6 +99,7 @@ socket.on("telemetria", function(dataSerial) { //inicia recepcion de datos del c
   graficaTemperatura.update();
   graficaVoltaje.update();
   graficaIluminacion.update();
+  graficaCorriente.update();
 
 });
 ////////////*********graficas************////////////////7///
@@ -108,7 +114,7 @@ var graficaAltura = new Chart(ctx, {
     datasets: [{
       label: 'altura[m]',
       //backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(0, 128, 128)',
+      borderColor: 'rgb(23, 32, 42)',
       data: []
     }]
   },
@@ -146,7 +152,7 @@ var graficaTemperatura = new Chart(ctx, {
     datasets: [{
       label: 'temperatura[°C]',
       //backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255,69,0)',
+      borderColor: 'rgb(230, 126, 34)',
       data: []
     }]
   },
@@ -163,13 +169,28 @@ var graficaVoltaje = new Chart(ctx, {
     labels: [],
     datasets: [{
       label: 'Voltaje[V]',
-      //backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(0,100,0)',
+      //backgroundColor: 'rgb(26, 82, 118)',
+      borderColor: 'rgb(26, 82, 118)',
       data: []
     }]
   },
   // Configuration options go here
   options: {}
+});
+
+//grafica 5 corriente
+var ctx = document.getElementById('grafica-corriente').getContext('2d');
+var graficaCorriente =new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Corriente [mA]',
+      borderColor: 'rgb(231, 76, 60)',
+      data: []
+    }]
+  },
+  options:{}
 });
 
 //grafica 6 luz ambiental
@@ -183,7 +204,7 @@ var graficaIluminacion = new Chart(ctx, {
     datasets: [{
       label: 'iluminacion [lux]',
       //backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(0,100,0)',
+      borderColor: 'rgb(247, 220, 111)',
       data: []
     }]
   },

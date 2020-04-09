@@ -4,6 +4,28 @@ const app = express();
 //var app = require("express")();
 var http = require("http").createServer(app);
 var io = require("socket.io")(http);
+// parametros para la escritura del csv
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const csvWriter = createCsvWriter({
+  path: 'telemetria.csv', //direccion y nombre del documento, se guarda en esta misma carpeta
+  header: [
+    {id: 'paquete', title: 'Paquete'},
+    {id: 'altura', title:'Altura'},
+    {id: 'presion', title: 'Presion'},
+    {id: 'temperatura', title: 'Temperatura'},
+    {id: 'voltaje', title: 'Voltaje'},
+    {id: 'corriente', title: 'Corriente'},
+    {id: 'tiempo', title: 'Tiempo UTC'},
+    {id: 'latitud', title: 'Latitud'},
+    {id: 'longitud', title: 'Longitud'},
+    {id: 'altitud', title: 'Altitud'},
+    {id: 'satelites', title: 'Satelites'},
+    {id: 'anguloX', title: 'AnguloX'},
+    {id: 'anguloY', title: 'AnguloY'},
+    {id: 'anguloZ', title: 'AnguloZ'},
+    {id: 'iluminacion', title: 'Iluminacion'},
+  ]
+});
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
@@ -31,11 +53,6 @@ port.on("open", () => { //conexion entre el servidor y el serial
   console.log("comunicacion abierta");
 });
 
-///*****CSV*****//////////
-// const fs = require("fs");
-// var csv = require("fast-csv");
-// var ws = fs.createWriteStream("my.csv");
-// let arr =[];
 
 parser.on("data", datos => { //transformamos los datos recibidos por el serial en un arreglo
   console.log(datos);
@@ -59,6 +76,29 @@ parser.on("data", datos => { //transformamos los datos recibidos por el serial e
     angZ: tele[13].toString(),
     lux: tele[14].toString()
   });
+
+  let data =[ //se asignan estos datos para escribir el csv, estos datos provienen del pueto serial
+    {
+      paquete: tele[0],
+      altura: tele[1],
+      presion: tele[2],
+      temperatura: tele[3],
+      voltaje: tele[4],
+      corriente: tele[5],
+      tiempo: tele[6],
+      latitud: tele[7],
+      longitud: tele[8],
+      altitud: tele[9],
+      satelites: tele[10],
+      anguloX: tele[11],
+      anguloY: tele[12],
+      anguloZ: tele[13],
+      iluminacion: tele[14]
+    }
+  ];
+  csvWriter
+    .writeRecords(data)
+    .then(()=> console.log('El csv fue escrito exitosamente'));
 });
 http.listen(3000, function() {
   console.log("listening on port 3000");
