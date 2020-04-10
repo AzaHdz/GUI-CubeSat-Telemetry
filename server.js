@@ -8,7 +8,7 @@ var io = require("socket.io")(http);
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const csvWriter = createCsvWriter({
   path: 'telemetria.csv', //direccion y nombre del documento, se guarda en esta misma carpeta
-  header: [
+  header: [ //se define el nombre de cada una de las columnas en el documento csv
     {id: 'paquete', title: 'Paquete'},
     {id: 'altura', title:'Altura'},
     {id: 'presion', title: 'Presion'},
@@ -34,8 +34,11 @@ app.use(express.static(__dirname + '/public')); // se crea la carpeta public par
 
 io.on("connection", function(socket) { //conexion entre el servidor y el cliente
   console.log("a user connected");
+  socket.on("comando", function(comando){ //recibe los eventos eviados por el cliente
+    console.log("comando: " + comando);
+    port.write(comando);//utiliza pel puerto serial para enviar un comando, 'Y' o 'N'
+  });
 });
-
 
 /////////******Serial port**********////////////////
 // puerto de Xbee lado derecho /dev/tty.usbserial-A9K2JVHI      /dev/cu.usbserial-A9K2JVHI
@@ -48,11 +51,10 @@ const port = new SerialPort('/dev/cu.usbserial-A9K2JVHI', {
 const parser = port.pipe(new Readline({ //LEERÁ los datos que terminen con un salto de linea (\r\n)
   delimiter: '\r\n'
 }));
-
+//port.write("hello");
 port.on("open", () => { //conexion entre el servidor y el serial
   console.log("comunicacion abierta");
 });
-
 
 parser.on("data", datos => { //transformamos los datos recibidos por el serial en un arreglo
   console.log(datos);

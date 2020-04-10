@@ -10,19 +10,22 @@
 
   <script src="/socket.io/socket.io.js" charset="utf-8"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 </head>
 <!-- links para usar socket io y chart js para graficar -->
 
 <body>
   <section class="title">
-    <h2>Registro de Telemetria</h4>
+    <h3>Registro de Telemetría</h3>
   </section>
   <section class="table-section">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-2">
-          <button type="button" class="btn btn-success btn-lg btn-block">Inicio</button>
-          <button type="button" class="btn btn-danger btn-lg btn-block">Fin</button>
+
+           <button id="btn-init" type="button" class="btn btn-success btn-lg btn-block">Inicio</button>
+
+          <button id="btn-fin" type="button" class="btn btn-danger btn-lg btn-block">Fin</button>
         </div>
         <div class="col-lg-10">
           <div class="row">
@@ -30,7 +33,7 @@
               <tr>
                 <th>No. de paquete</th>
                 <th>altura [m]</th>
-                <th>presion [Pa]</th>
+                <th>presión [Pa]</th>
                 <th>temperatura [°C]</th>
                 <th>voltaje [v]</th>
                 <th>corriente [mA]</th>

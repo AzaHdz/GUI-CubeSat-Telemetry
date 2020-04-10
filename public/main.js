@@ -1,7 +1,14 @@
-const socket = io(); //extablece la comuniCACION cliente-servidor
+var socket = io(); //extablece la comuniCACION cliente-servidor
+document.getElementById("btn-init").addEventListener("click", function(){//evento para cuando el boton sea presionado
+  console.log("inicio");
+  socket.emit('comando', "Y"); // el evento se llama comando, y se envia el dato 'Y'
+});
+document.getElementById("btn-fin").addEventListener("click", function(){
+  console.log("fin");
+  socket.emit("comando", 'N') //el evento se llama comando y se envia 'N'
+})
 
 let counter = 0; //contador para los paquetes de datos que llegan por el serial
-
 
 ////********** Datos recibidos ****///////////
 socket.on("telemetria", function(dataSerial) { //inicia recepcion de datos del cliente  con el evento "telemetria"
