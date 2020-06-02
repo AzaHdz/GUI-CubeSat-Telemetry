@@ -13,6 +13,11 @@ let counter = 0; //contador para los paquetes de datos que llegan por el serial
 ////********** Datos recibidos ****///////////
 socket.on("telemetria", function(dataSerial) { //inicia recepcion de datos del cliente  con el evento "telemetria"
 
+  let calib = document.getElementById("calibracion");
+  if(dataSerial.paquete > 130){
+    calib.innerHTML = "Calibrado!";
+  } else {calib.innerHTML = "Calibrando...";}
+
   let cuenta = document.getElementById("paquete");
   cuenta.innerHTML = dataSerial.paquete;
 
